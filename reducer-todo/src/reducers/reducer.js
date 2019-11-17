@@ -1,21 +1,34 @@
 import React, {  useReducer } from 'react'
 
 
-export const initialState = {
-  item: 'Learn about reducers',
-  completed: false,
-  id: 3892987589,
-}
+export const initialState = [
+  {
+    item: 'Learn about reducers',
+    completed: false,
+    id: 3892987589
+  },
+  {
+    item: 'Another thing',
+    completed: false,
+    id: 294875028749
+  }
+]
 
-export const reducer = (state, action) => {
+export const reducer = (state , action) => {
   switch(action.type) {
     case 'item':
-      return {
-        item: this.state.item,
-    }
+      return [
+        ...state,
+        {
+          item: action.payload,
+          completed: false,
+          id: Date.now(),
+        }
+  ]
     case 'completed':
       return {
-        completed: !this.state.completed
+        ...state,
+        completed: !state.completed
     }  
     case 'id': 
       return {
