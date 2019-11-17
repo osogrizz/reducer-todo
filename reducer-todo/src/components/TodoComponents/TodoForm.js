@@ -16,8 +16,10 @@ export const TodoForm =  () => {
     event.preventDefault()
     console.log('cleared')
   }
+
   const handleSubmit = (event) => {
     event.preventDefault()
+      
     setInput('')
   }
   
@@ -26,7 +28,16 @@ export const TodoForm =  () => {
     <div>
       <form onSubmit={handleSubmit} >
         <input type="text" onChange={handleChange} value={input} name={input} />
-        <button onClick={() => dispatch({ type: 'item', payload: input })} >Add Todo</button>
+
+        <button 
+          onClick={() => {
+            dispatch({ type: 'item', payload: input  })} 
+          }
+        >
+          Add Todo
+        </button>
+
+
         <button onClick={handleClear} >Clear Completed</button>
       </form>
       {console.log('state', state)}

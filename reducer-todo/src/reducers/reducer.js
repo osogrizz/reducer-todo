@@ -17,20 +17,20 @@ export const initialState = [
 export const reducer = (state , action) => {
   switch(action.type) {
     case 'item':
-      return [
-        ...state,
-        {
-          item: action.payload,
-          completed: false,
-          id: Date.now(),
-        }
-  ]
+      return (action.payload === '') ? state : [ 
+          ...state,
+          {
+            item: action.payload,
+            completed: false,
+            id: Date.now(),
+          }
+        ]
     case 'completed':
       return {
         ...state,
         completed: !state.completed
     }  
-    case 'id': 
+    case 'clear': 
       return {
         id: this.state.id
     }
