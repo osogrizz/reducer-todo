@@ -2,51 +2,70 @@ import React, { useState, useReducer } from 'react';
 import { initialState, reducer } from '../../reducers/reducer';
 import styled from 'styled-components'
 
+// import Todo from './Todo'
+
 import './Todo.css'
 
 export const TodoForm = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [input, setInput] = useState('')
+  // const [complete, setComplete] = useState(false)
+
+
 
   const handleChange = (event) => {
     event.preventDefault()
+    // console.log('change value', event.target.value)
     setInput(event.target.value)
   }
 
   const handleClear = (event) => {
     event.preventDefault()
+    console.log('clear')
+
+
     dispatch({
-      type: 'clear',
-      payload: state
+      type: 'CLEAR',
+      // payload: state
     })
   }
 
-  const handleAdd = () => {
+  const handleAdd = (event) => {
+    event.preventDefault()
     dispatch({
-      type: 'item',
-      payload: input
+      type: 'ADD_TODO',
+      item: input,
+      completed: false,
+      id: Date.now(),
     })
+    setInput('')
   }
   
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(state)  
-    setInput('')
+    // setInput('')
   }
+
+  
   
   const toggleComplete = (event) => {
-    event.target.classList.toggle('complete');
-    // console.log(event.target.value)
-
+    event.preventDefault()
+    event.target.classList.toggle('complete')
+    console.log(event.target.value)
     dispatch({
-      type: 'completed',
-      payload: event.target
+      type: 'TOGGLE_COMPLETED',
+      id: event.target.id,
+      payload:  event.target.value
     })
+    console.log(state)
   }
+
+
  
   return (
-    <div>
+    <div style={{margin: '40px'}}>
       <form onSubmit={handleSubmit} >
         <input type="text" onChange={handleChange} value={input} name={input} />
 
@@ -57,11 +76,14 @@ export const TodoForm = () => {
         <button onClick={handleClear}>
           Clear Completed
         </button>
+
       </form>
-      <div>
+      <div style={{display: 'flex', justifyContent: 'center', margin: '40px auto', width: '900px', flexWrap: 'wrap'}}>
         {
-          state.map( todo => (
-            <Item key={todo.id} onClick={toggleComplete} value={todo.id} >{todo.item}</Item>
+          state.map( (todo) => (
+          <Item key={todo.id} id={todo.id} onClick={toggleComplete} value={todo.id} >
+            {todo.item}
+          </Item>
           ))
         }
       </div>

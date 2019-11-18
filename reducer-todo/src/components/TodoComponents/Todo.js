@@ -7,15 +7,23 @@ import {initialState, reducer} from '../../reducers/reducer';
 const [state, dispatch] = useReducer(reducer, initialState);
 
 const Todo = () => {
-
+  console.log(state)
   const handleToggle = (event) => {
+    console.log(event.target.value)
+    event.target.classList.toggle('complete');
     
+    // dispatch({
+    //   type: 'COMPLETED',
+    //   payload: event.target.value
+    // })
+    // console.log(state)
   }
 
-  return (
+  return ( state.map( todo => (
     <Item onClick={handleToggle}>
-      {/* {state.item} */}
+      {todo.item}
     </Item>
+  ))
   )
 }
 

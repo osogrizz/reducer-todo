@@ -10,19 +10,16 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
 const TodoList = () => {
 
-  const toggleComplete = (event) => {
-    console.log(event.target.value)
-
-  }
+  console.log('state', state)
 
 
   return (
     <div>
 
       { 
-        this.state.map( todo => {
+        state.map( (todo, index) => {
           return (
-            todo ? <Todo key={todo.id} task={todo.task} completed={todo.completed} id={todo.id} toggleComplete={toggleComplete} /> : null
+           <Todo /> 
           )
         })
       
