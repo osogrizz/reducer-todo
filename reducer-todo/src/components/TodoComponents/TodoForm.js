@@ -27,7 +27,6 @@ export const TodoForm = () => {
 
     dispatch({
       type: 'CLEAR',
-      // payload: state
     })
   }
 
@@ -53,11 +52,11 @@ export const TodoForm = () => {
   const toggleComplete = (event) => {
     event.preventDefault()
     event.target.classList.toggle('complete')
-    console.log(event.target.value)
+    console.log(event.target.toggled)
     dispatch({
       type: 'TOGGLE_COMPLETED',
       id: event.target.id,
-      payload:  event.target.value
+      completed: event.target.completed
     })
     console.log(state)
   }
@@ -81,7 +80,7 @@ export const TodoForm = () => {
       <div style={{display: 'flex', justifyContent: 'center', margin: '40px auto', width: '900px', flexWrap: 'wrap'}}>
         {
           state.map( (todo) => (
-          <Item key={todo.id} id={todo.id} onClick={toggleComplete} value={todo.id} >
+          <Item key={todo.id} id={todo.id} onClick={toggleComplete} toggled={todo.completed} >
             {todo.item}
           </Item>
           ))

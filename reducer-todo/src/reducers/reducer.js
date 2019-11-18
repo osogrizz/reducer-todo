@@ -17,20 +17,21 @@ export const initialState = [
 export const reducer = (state , action) => {
   switch(action.type) {
     case 'ADD_TODO':
-     case 'item':
-        return (action.item === '') ? state : [ 
-          ...state,
-          {
-            item: action.item,
-            completed: action.completed,
-            id: action.id,
-          }
-        ]
+      return (action.item === '') ? state : [ 
+        ...state,
+        {
+          item: action.item,
+          completed: action.completed,
+          id: action.id,
+        }
+      ]
 
 
     case 'TOGGLE_COMPLETED':
         return state.map( todo => {
-          if (todo.id !== action.id) {
+          if (todo.id !== parseInt(action.id)){
+            // console.log(parseInt(action.id))
+            // console.log('no toggle')
             return todo
           }
           return {
@@ -38,14 +39,17 @@ export const reducer = (state , action) => {
             completed: !todo.completed
           }
         })
-        
-        
+          
 
-      
-
+        
+          
+        
 
     case 'CLEAR': 
-      return state
+      return state.filter( todo => {
+        return !todo.completed
+        }
+      )
 
     default: 
      return initialState
