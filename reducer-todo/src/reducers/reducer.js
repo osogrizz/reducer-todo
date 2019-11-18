@@ -28,22 +28,17 @@ export const reducer = (state , action) => {
 
 
     case 'TOGGLE_COMPLETED':
-        return state.map( todo => {
-          if (todo.id !== parseInt(action.id)){
-            // console.log(parseInt(action.id))
-            // console.log('no toggle')
-            return todo
-          }
-          return {
-            ...todo,
-            completed: !todo.completed
-          }
-        })
-          
-
-        
-          
-        
+      return state.map( todo => {
+        if (todo.id !== parseInt(action.id)){
+          // console.log(parseInt(action.id))
+          // console.log('no toggle')
+          return todo
+        }
+        return {
+          ...todo,
+          completed: !todo.completed
+        }
+      })
 
     case 'CLEAR': 
       return state.filter( todo => {
